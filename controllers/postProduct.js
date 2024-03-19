@@ -1,20 +1,14 @@
-const mongoose = require('mongoose');
-const productSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  description: { type: String, required: true },
-  img: String,
-});
-
-const Product = mongoose.model('Product', productSchema);
+const Product = require('../models/creatModel');
+const {
+  postProductValidation,
+} = require('../validation/postProductValidation');
 
 async function postProduct(props) {
   console.log(props);
 
-  const response = await Product.create({
-    title: 'test',
-    description: 'test',
-    img: 'test',
-  });
+  postProductValidation(props);
+
+  const response = await Product.create({ props });
 
   return response;
 }

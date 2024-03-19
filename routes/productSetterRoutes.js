@@ -10,7 +10,7 @@ router.post('/', async (req, res) => {
     res.json(data);
   } catch (error) {
     console.log('error', error.message);
-    res.status(400).json({ error: error.massage });
+    res.status(400).json({ error: error.message });
   }
 });
 
