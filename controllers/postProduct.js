@@ -8,7 +8,7 @@ async function postProduct(props) {
 
   postProductValidation(props);
 
-  const response = await Product.create({ props });
+  const response = await Product.create(props);
 
   return response;
 }
