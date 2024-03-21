@@ -1,5 +1,6 @@
 const express = require('express');
 require('dotenv').config();
+const cors = require('cors');
 const mongoose = require('mongoose');
 const app = express();
 const Port = 3000;
@@ -9,12 +10,14 @@ app.use(express.json());
 // routes
 
 // Be kintamonjo, nurodant kelia vietoj kintamojo
-
-app.use('/product', require('./routes/productGetterRoutes'));
+app.use(cors());
+app.use('/product', require('./routes/productGetter.routes'));
 
 // sukuriant kintamaji
 
-const productSetterRouter = require('./routes/productSetterRoutes');
+const productSetterRouter = require('./routes/productSetter.routes');
+
+app.get('/', (req, res) => res.send('Express on Vercel'));
 
 app.use('/product', productSetterRouter);
 
