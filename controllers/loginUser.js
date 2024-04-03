@@ -25,7 +25,7 @@ async function loginUser(user) {
     },
     process.env.JWT_SECRET,
     {
-      expiresIn: '20s',
+      expiresIn: '20m',
     }
   );
 
