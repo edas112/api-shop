@@ -1,5 +1,6 @@
 const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 async function loginUser(user) {
   const { username, password } = user;
@@ -17,11 +18,18 @@ async function loginUser(user) {
   if (!machted) {
     throw new Error('Neteisingai ivestas slaptazodis arba prisijungimo vardas');
   }
-  if (!machted) {
-    throw new Error('Neteisingai ivestas slaptazodis arba prisijungimo vardas');
-  }
+  // create token
+  const token = jwt.sign(
+    {
+      username: findUser.username,
+    },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: '20s',
+    }
+  );
 
-  return 'logged in';
+  return { token };
 }
 
 module.exports = loginUser;
